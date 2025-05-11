@@ -6,8 +6,6 @@ router.get('/DavidApiTest', async (req, res) => {
   try {
     
     const provider = new ethers.providers.JsonRpcProvider('https://rpc.ankr.com/eth/33985f09ea7ea61d7e8aae4da2f5ebce63b3495eee9c8528980edcd162b46708');
-    console.log(provider);
-
     
     const erc20Abi = [
       "function name() view returns (string)",
@@ -17,8 +15,6 @@ router.get('/DavidApiTest', async (req, res) => {
 
     const daiAddress = '0x6B175474E89094C44Da98b954EedeAC495271d0F';
     const daiContract = new ethers.Contract(daiAddress, erc20Abi, provider);
-
-    console.log("DAI:" + daiContract);
 
     const name = await daiContract.name();
     const symbol = await daiContract.symbol();
@@ -34,7 +30,7 @@ router.get('/DavidApiTest', async (req, res) => {
 
     console.error('Error fetching contract data:', error);
     res.status(500).send('Failed to fetch smart contract data.');
-    
+
   }
 });
 
